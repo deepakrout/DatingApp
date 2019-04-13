@@ -20,7 +20,7 @@ export class AuthGuard implements  CanActivate {
     if (this.authService.loggedIn()) {
       return true;
     }
-    this.alertfy.error('You shall not pass!!');
+    this.alertfy.error('Please login or sign-up to access this page!');
     this.router.navigate(['/home']);
     return false;
   }
