@@ -15,11 +15,11 @@
 
         </ul>
 
-        <div *ngIf="loggedIn()" class="dropdown mt-3" dropdown>
+        <div *ngIf="loggedIn()" class="dropdown" dropdown>
             <a class="dropdown-toggle text-light" dropdownToggle>
                 Welcome {{auth.decodedToken?.unique_name | titlecase}}
             </a>
-            <div class="dropdown-menu" *dropdownMenu>
+            <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Edit Profile</a>
                 <div class="dropdown-devider"></div>
                 <a class="dropdown-item" href="#" (click)="logout()">
