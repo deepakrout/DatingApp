@@ -24,6 +24,13 @@ namespace DatingApp.API.Services
             _context.Remove(entity);
         }
 
+        // TODO: Move it to its own repository
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+            return photo;
+        }
+
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(p=> p.Photos).FirstOrDefaultAsync(u => u.Id == id);
@@ -41,4 +48,5 @@ namespace DatingApp.API.Services
             return await _context.SaveChangesAsync() > 0;
         }
     }
+    
 }
