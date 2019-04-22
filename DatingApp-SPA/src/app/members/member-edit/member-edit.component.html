@@ -62,6 +62,9 @@
                         <h4>Interests</h4>
                         <p>{{user.interests}}</p>
                     </tab>
+                    <tab heading="Photos">
+                        <app-photo-editor [photos]="user.photos"></app-photo-editor>
+                    </tab>
                 </tabset>
             </div>
         </div>
