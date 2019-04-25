@@ -63,7 +63,7 @@
                         <p>{{user.interests}}</p>
                     </tab>
                     <tab heading="Photos">
-                        <app-photo-editor [photos]="user.photos"></app-photo-editor>
+                        <app-photo-editor [photos]="user.photos" (getMemberPhotoChanged)="updateMainPhoto($event)"></app-photo-editor>
                     </tab>
                 </tabset>
             </div>

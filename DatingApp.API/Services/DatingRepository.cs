@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
 using DatingApp.API.Models;
@@ -22,6 +23,12 @@ namespace DatingApp.API.Services
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
+        }
+
+        public async Task<Photo> GetMainPhotoForUser(int userId)
+        {
+            return await _context.Photos.Where(u => u.Userid == userId)
+                         .FirstOrDefaultAsync(p => p.IsMain);
         }
 
         // TODO: Move it to its own repository
