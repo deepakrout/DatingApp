@@ -14,6 +14,7 @@ import { AuthService } from '../../_services/auth.service';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
+  photoUrl: string;
 
   /** Below code to prevent the user and want them if they click the browser close button */
   @HostListener('window:beforeunload', ['$event'])
@@ -32,6 +33,7 @@ export class MemberEditComponent implements OnInit {
     this.routes.data.subscribe(data => {
       this.user = data['user'];
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser() {
