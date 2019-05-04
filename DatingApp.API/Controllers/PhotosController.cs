@@ -108,25 +108,34 @@ namespace DatingApp.API.Controllers {
             if (userId != int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value))
                 return Unauthorized ();
 
+            // Get the user
             var user = await _repo.GetUser (userId);
 
+            // if the photo doesn;t belong to the user return unauthorized
             if (!user.Photos.Any (p => p.Id == id))
                 return Unauthorized ();
 
+            // Get the photo from the report for the user
             var photoFromRepo = await _repo.GetPhoto (id);
 
+            // Check if the photo is set to main photo
             if (photoFromRepo.IsMain)
                 return BadRequest ("This is already the main photo");
 
+            // Get current main photo
             var currentMainPhoto = await _repo.GetMainPhotoForUser (userId);
 
+            // Set current main photo to false
             currentMainPhoto.IsMain = false;
 
+            // Set the new main photo to true
             photoFromRepo.IsMain = true;
 
+            // Save all changes
             if (await _repo.SaveAll ())
                 return NoContent ();
 
+            // Naything else return bad request
             return BadRequest ("Could not photo to main");
         }
 
