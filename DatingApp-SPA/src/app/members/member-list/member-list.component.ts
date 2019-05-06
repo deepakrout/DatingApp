@@ -20,18 +20,19 @@ export class MemberListComponent implements OnInit {
     // this.loadUsers();
 
     this.route.data.subscribe(data => {
-      this.users = data['users'];
+      // console.log(`member-list.component`, data,  data['users'].result);
+      this.users = data['users'].result;
     });
 
   }
 
-  loadUsers() {
-      this.userService.getUsers().subscribe((users: User[]) => {
-        this.users = users;
-      }, error => {
-        this.alertify.error(error);
-      }
-    );
-  }
+  // loadUsers() {
+  //     this.userService.getUsers().subscribe((users: User[]) => {
+  //       this.users = users;
+  //     }, error => {
+  //       this.alertify.error(error);
+  //     }
+  //   );
+  // }
 
 }
