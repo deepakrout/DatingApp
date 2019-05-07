@@ -35,8 +35,11 @@ export class UserService {
       .pipe(
         map(response => {
           paginatedResults.result = response.body;
+          // console.log(`response.headers`, response);
           if (response.headers.get('Pagination') != null) {
+              // console.log(`Pagination header `, response.headers.get('Pagination'));
               paginatedResults.pagination = JSON.parse(response.headers.get('Pagination'));
+              // console.log(`paginatedResults.pagination`, paginatedResults.pagination);
           }
           return paginatedResults;
         })
