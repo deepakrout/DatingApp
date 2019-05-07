@@ -23,7 +23,7 @@ export class MemberListComponent implements OnInit {
     // this.loadUsers();
 
     this.route.data.subscribe(data => {
-      console.log(`member-list.component`, data,  data['users'].result);
+      // console.log(`member-list.component`, data,  data['users'].result);
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
