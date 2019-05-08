@@ -14,6 +14,9 @@ import { cleanSession } from 'selenium-webdriver/safari';
 export class MemberListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
+  user: User = JSON.parse(localStorage.getItem('user'));
+  genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
+  userParams: any = {};
 
   constructor( private userService: UserService,
                private alertify: AlertifyService,
@@ -27,7 +30,16 @@ export class MemberListComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
+    this.userParams.gender = this.user.gender === 'female' ? 'male' : this.user.gender;
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
+  }
 
+  resetFilters() {
+    this.userParams.gender = this.user.gender === 'female' ? 'male' : this.user.gender;
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
+    this.loadUsers();
   }
 
   pageChanged(event: any): void {
@@ -37,7 +49,10 @@ export class MemberListComponent implements OnInit {
   }
 
   loadUsers() {
-      this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage)
+      console.log(`userParams`, this.userParams);
+      this.userService.getUsers(this.pagination.currentPage,
+                                this.pagination.itemsPerPage,
+                                this.userParams)
       .subscribe((res: PaginatedResults<User[]>) => {
         this.users = res.result;
         this.pagination = res.pagination;
