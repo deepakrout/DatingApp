@@ -4,7 +4,7 @@ import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginatedResults } from '../../_models/pagination';
-import { cleanSession } from 'selenium-webdriver/safari';
+
 
 @Component({
   selector: 'app-member-list',
