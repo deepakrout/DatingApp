@@ -38,6 +38,7 @@ export class MemberDetailComponent implements OnInit {
     this.galleryImages = this.getImages();
   }
 
+  /** method to get images  */
   getImages(): any[] {
     const imageUrls = [];
     // tslint:disable-next-line:prefer-for-of

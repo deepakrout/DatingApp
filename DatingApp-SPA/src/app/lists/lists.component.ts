@@ -22,7 +22,9 @@ export class ListsComponent implements OnInit {
               private alertify: AlertifyService
   ) { }
 
+  /** ngOnInit event */
   ngOnInit() {
+    // Subscribe to route data
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
@@ -30,8 +32,9 @@ export class ListsComponent implements OnInit {
     this.likesParam = 'Likers';
   }
 
+  /** Method to load user based on params */
   loadUsers() {
-    console.log(`userParams`, this.likesParam);
+   // console.log(`userParams`, this.likesParam);
     this.userService.getUsers(this.pagination.currentPage,
       this.pagination.itemsPerPage,
       null, this.likesParam)
@@ -45,10 +48,11 @@ export class ListsComponent implements OnInit {
       );
   }
 
+  /** Method called in page change event */
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadUsers();
-    console.log(`this.pagination.currentPage`, this.pagination.currentPage);
+    // console.log(`this.pagination.currentPage`, this.pagination.currentPage);
   }
 
 }
