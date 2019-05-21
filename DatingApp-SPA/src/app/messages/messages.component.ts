@@ -14,7 +14,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 export class MessagesComponent implements OnInit {
   messages: Message[];
   pagination: Pagination;
-  messageCOntainer = 'Unread';
+  messageContainer = 'Unread';
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -23,16 +23,18 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.messages = data['messages'].result;
-      this.pagination = data['messages'].pagination;
+      console.log(`Data from resolver`, data);
+      this.messages = data['message'].result;
+      this.pagination = data['message'].pagination;
     });
   }
 
   loadMessages() {
+    console.log(`this.authService.decodedToken.nameId ${this.authService.decodedToken.nameId}`);
     this.userService.getMessages(this.authService.decodedToken.nameId,
       this.pagination.currentPage,
       this.pagination.itemsPerPage,
-      this.messageCOntainer).subscribe((resp: PaginatedResults<Message[]>) => {
+      this.messageContainer).subscribe((resp: PaginatedResults<Message[]>) => {
         this.messages = resp.result;
         this.pagination = resp.pagination;
       }, error => {

@@ -20,7 +20,7 @@ export class MessagesResolver implements Resolve<Message[]> {
                 private alertify: AlertifyService) {}
 
      resolve(route: ActivatedRouteSnapshot): Observable<Message[]> {
-         return this.userService.getMessages(this.authService.decodedToken.nammeId,
+         return this.userService.getMessages(this.authService.decodedToken.nameid,
                     this.pageNumber, this.pageSize, this.messageContainer).pipe(
              catchError( (error) => {
                 this.alertify.error('Problem retieving messages');
