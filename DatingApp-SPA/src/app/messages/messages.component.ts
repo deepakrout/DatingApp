@@ -23,15 +23,15 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      console.log(`Data from resolver`, data);
-      this.messages = data['message'].result;
-      this.pagination = data['message'].pagination;
+      // console.log(`Data from resolver`, data);
+      this.messages = data['messages'].result;
+      this.pagination = data['messages'].pagination;
     });
   }
 
   loadMessages() {
-    console.log(`this.authService.decodedToken.nameId ${this.authService.decodedToken.nameId}`);
-    this.userService.getMessages(this.authService.decodedToken.nameId,
+    // console.log(`this.authService.decodedToken.nameId ${this.authService.decodedToken.nameId}`);
+    this.userService.getMessages(this.authService.decodedToken.nameid,
       this.pagination.currentPage,
       this.pagination.itemsPerPage,
       this.messageContainer).subscribe((resp: PaginatedResults<Message[]>) => {
