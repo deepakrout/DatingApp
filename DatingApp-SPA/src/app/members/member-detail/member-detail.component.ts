@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-member-detail',
@@ -11,6 +12,7 @@ import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gal
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
+  @ViewChild('memberTabs') memberTabs: TabsetComponent;
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -21,8 +23,13 @@ export class MemberDetailComponent implements OnInit {
 
   ngOnInit() {
     // this.loadUser();
-    this.route.data.subscribe( data => {
+    this.route.data.subscribe(data => {
       this.user = data['user'];
+    });
+
+    this.route.queryParams.subscribe(params => {
+      const selectedTab = params['tab'];
+      this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
     });
 
     this.galleryOptions = [
@@ -42,7 +49,7 @@ export class MemberDetailComponent implements OnInit {
   getImages(): any[] {
     const imageUrls = [];
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.user.photos.length; i++ ) {
+    for (let i = 0; i < this.user.photos.length; i++) {
       imageUrls.push({
         small: this.user.photos[i].url,
         medium: this.user.photos[i].url,
@@ -60,6 +67,10 @@ export class MemberDetailComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  selectTab(tabId: number) {
+    this.memberTabs.tabs[tabId].active = true;
   }
 
 }

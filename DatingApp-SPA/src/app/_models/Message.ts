@@ -3,8 +3,8 @@ export interface Message {
     senderId: number;
     senderKnownAs: string;
     senderPhotoUrl: string;
-    recipientId: number;
-    recipientKnownAs: string;
+    receipientId: number;
+    receipientKnownAs: string;
     receipientPhotoUrl: string;
     content: string;
     isRead: boolean;
