@@ -28,6 +28,7 @@ export class MemberMessagesComponent implements OnInit {
     const currentUserId = +this.authService.decodedToken.nameid;
     this.userService.getMessageThread(this.authService.decodedToken.nameid, this.recipientId)
     .pipe(
+      // if messages are unread mark thos as read
       tap(messages => {
         // debugger;
         // tslint:disable-next-line:prefer-for-of
@@ -48,7 +49,7 @@ export class MemberMessagesComponent implements OnInit {
 
   sendMessage() {
     this.newMessage.receipientId = this.recipientId;
-    console.log(`newMessage`, this.newMessage);
+    // console.log(`newMessage`, this.newMessage);
     this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
     .subscribe((message: Message) => {
       // debugger;
