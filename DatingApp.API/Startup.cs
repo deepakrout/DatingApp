@@ -90,8 +90,18 @@ namespace DatingApp.API
             //seeder.SeedUser();
             app.UseCors( x=> x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader() );
             app.UseAuthentication();
+            // this will ensure to look files name such as Index.html, default.aspx, default.html etc.
+            app.UseDefaultFiles();
+            // this will ensure serving of statinc content
+            app.UseStaticFiles();
             // app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes => {
+                //this line will let MVC handle API routes separately then the SPA routes
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Fallback", action = "Index" }
+                );
+            });
         }
     }
 }

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { PaginatedResults } from '../_models/pagination';
 import { map } from 'rxjs/operators';
-import { Message } from '../_models/Message';
+import { Message } from '../_models/message';
 
 
 

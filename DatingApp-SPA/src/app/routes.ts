@@ -11,7 +11,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved.changes.guard';
 import { ListsResolver } from './_resolvers/lists.resolver';
-import { Message } from './_models/Message';
+import { Message } from './_models/message';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export const appRoutes: Routes = [
